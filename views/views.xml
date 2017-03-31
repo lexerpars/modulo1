@@ -1,0 +1,85 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="modulo1.list">
+      <field name="name">modulo1 list</field>
+      <field name="model">modulo1.modulo1</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+
+    <report id="reporte_modulo1" model="modulo1.modulo1"
+        name="Reporte.listing"
+        string="Hola Mundo"
+        report_type="qweb-pdf">
+
+
+    <record model="ir.ui.view" id="modulo1.form">
+      <field name="name">modulo1 list</field>
+      <field name="model">modulo1.modulo1</field>
+      <field name="arch" type="xml">
+        <form string="Form" version="7.0">
+          <label for="Nombre"/>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+          <footer>
+             <button name="Print" type="object" string="Imprimir" class="oe_highlight" />
+             <button string="Cancelar"  class="oe_link"  special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+   
+         
+    <!-- actions opening views on models -->
+
+
+    <record model="ir.actions.act_window" id="modulo1.action_window">
+      <field name="name">modulo1 window</field>
+      <field name="res_model">modulo1.modulo1</field>
+      <field name="view_mode">form</field>
+    </record>
+      
+    <record model="ir.actions.act_window" id="modulo1.action_list">
+      <field name="name">Listado de Datos</field>
+      <field name="res_model">modulo1.modulo1</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <!-- server action to the one above -->
+    
+    <record model="ir.actions.server" id="modulo1.action_server">
+      <field name="name">modulo1 server</field>
+      <field name="model_id" ref="model_modulo1_modulo1"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+  
+
+    <!-- Top menu item -->
+    <menuitem name="modulo1" id="modulo1.menu_root"/>
+   
+    <!-- menu categories -->
+    <menuitem name="Formulario" id="modulo1.menu_1" parent="modulo1.menu_root"/>
+    <menuitem name="Listado" id="modulo1.menu_2" parent="modulo1.menu_root"/>
+  
+   
+    <!-- actions -->
+    <menuitem name="Ingresa Datos" id="modulo1.menu_1_list" parent="modulo1.menu_1"
+              action="modulo1.action_window"/>
+    <menuitem name="Lista Datos" id="modulo1" parent="modulo1.menu_2"
+              action="modulo1.action_list"/>
+  </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<template id="modulo1.reportes">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<t t-esc="o.name" />Hello
+					</div>
+				</t>
+			</t>
+		</template>
+		
+		<report id="modulo1.product_template_report"
+			name="modulo1.reportes"
+			file="modulo1.reportes"
+			model="modulo1.modulo1"
+			report_type="qweb-pdf"
+			string="Product Report"
+			menu="True"/>
+
+	</data>
+</odoo>
